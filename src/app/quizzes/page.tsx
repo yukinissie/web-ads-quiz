@@ -1,34 +1,19 @@
 import Link from "next/link";
+import { quizzes, type Difficulty } from "@/data/quizzes";
 
-type Quiz = {
-  id: number;
-  title: string;
-  category: string;
-  difficulty: "easy" | "medium" | "hard";
-};
-
-async function getQuizzes(): Promise<Quiz[]> {
-  // TODO: Replace with actual API call
-  return [
-    { id: 1, title: "CPCとCPMの違いとは？", category: "基礎知識", difficulty: "easy" },
-    { id: 2, title: "Google広告のスマートビディングとは？", category: "Google広告", difficulty: "medium" },
-    { id: 3, title: "アトリビューションモデルの種類と特徴", category: "計測・分析", difficulty: "hard" },
-  ];
-}
-
-const difficultyLabel = {
+const difficultyLabel: Record<Difficulty, { label: string; className: string }> = {
   easy: { label: "初級", className: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" },
   medium: { label: "中級", className: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200" },
   hard: { label: "上級", className: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200" },
 };
 
-export default async function QuizzesPage() {
-  const quizzes = await getQuizzes();
-
+export default function QuizzesPage() {
   return (
     <main className="min-h-screen p-8 max-w-3xl mx-auto">
       <h1 className="text-3xl font-bold mb-2">問題一覧</h1>
-      <p className="text-gray-600 dark:text-gray-400 mb-8">カテゴリ別のWeb広告問題に挑戦しよう</p>
+      <p className="text-gray-600 dark:text-gray-400 mb-8">
+        カテゴリ別のWeb広告問題に挑戦しよう（全{quizzes.length}問）
+      </p>
 
       <ul className="space-y-4">
         {quizzes.map((quiz) => {

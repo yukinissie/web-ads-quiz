@@ -1,39 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
-type QuizDetail = {
-  id: number;
-  title: string;
-  category: string;
-  question: string;
-  choices: { label: string; text: string }[];
-  answer: string;
-  explanation: string;
-};
-
-async function getQuiz(id: string): Promise<QuizDetail | null> {
-  // TODO: Replace with actual API call
-  const quizzes: QuizDetail[] = [
-    {
-      id: 1,
-      title: "CPCとCPMの違いとは？",
-      category: "基礎知識",
-      question: "CPC（Cost Per Click）とCPM（Cost Per Mille）の説明として正しいものはどれですか？",
-      choices: [
-        { label: "A", text: "CPCはクリックごとに課金、CPMは1,000インプレッションごとに課金" },
-        { label: "B", text: "CPCは1,000インプレッションごとに課金、CPMはクリックごとに課金" },
-        { label: "C", text: "どちらもクリックごとに課金される" },
-        { label: "D", text: "どちらも1,000インプレッションごとに課金される" },
-      ],
-      answer: "A",
-      explanation:
-        "CPCはクリック単価で、広告がクリックされるたびに費用が発生します。CPMはインプレッション単価で、広告が1,000回表示されるごとに費用が発生します。",
-    },
-  ];
-
-  const quiz = quizzes.find((q) => q.id === parseInt(id, 10));
-  return quiz ?? null;
-}
+import { quizzes } from "@/data/quizzes";
 
 export default async function QuizDetailPage({
   params,
@@ -41,7 +8,7 @@ export default async function QuizDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const quiz = await getQuiz(id);
+  const quiz = quizzes.find((q) => q.id === parseInt(id, 10));
 
   if (!quiz) {
     notFound();
