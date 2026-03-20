@@ -49,22 +49,22 @@ export default async function QuizDetailPage({
 
   return (
     <main className="min-h-screen p-8 max-w-3xl mx-auto">
-      <Link href="/quizzes" className="text-blue-600 hover:underline text-sm mb-6 inline-block">
+      <Link href="/quizzes" className="text-blue-600 dark:text-blue-400 hover:underline text-sm mb-6 inline-block">
         ← 問題一覧に戻る
       </Link>
 
       <div className="mb-2">
-        <span className="text-sm text-gray-500">{quiz.category}</span>
+        <span className="text-sm text-gray-500 dark:text-gray-400">{quiz.category}</span>
       </div>
       <h1 className="text-2xl font-bold mb-6">{quiz.title}</h1>
 
-      <div className="rounded-lg border border-gray-200 p-6 mb-6">
-        <p className="font-medium text-gray-900 mb-4">{quiz.question}</p>
+      <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-6 mb-6">
+        <p className="font-medium text-gray-900 dark:text-white mb-4">{quiz.question}</p>
         <ul className="space-y-3">
           {quiz.choices.map((choice) => (
             <li
               key={choice.label}
-              className="rounded-md border border-gray-200 px-4 py-3 hover:bg-gray-50 cursor-pointer transition-colors"
+              className="rounded-md border border-gray-200 dark:border-gray-700 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors"
             >
               <span className="font-semibold mr-2">{choice.label}.</span>
               {choice.text}
@@ -73,11 +73,11 @@ export default async function QuizDetailPage({
         </ul>
       </div>
 
-      <details className="rounded-lg border border-blue-100 bg-blue-50 p-5">
-        <summary className="font-semibold text-blue-700 cursor-pointer">解答と解説を見る</summary>
+      <details className="rounded-lg border border-blue-100 dark:border-blue-900 bg-blue-50 dark:bg-blue-950 p-5">
+        <summary className="font-semibold text-blue-700 dark:text-blue-300 cursor-pointer">解答と解説を見る</summary>
         <div className="mt-4">
-          <p className="font-bold text-blue-800 mb-2">正解：{quiz.answer}</p>
-          <p className="text-gray-700">{quiz.explanation}</p>
+          <p className="font-bold text-blue-800 dark:text-blue-200 mb-2">正解：{quiz.answer}</p>
+          <p className="text-gray-700 dark:text-gray-300">{quiz.explanation}</p>
         </div>
       </details>
     </main>
